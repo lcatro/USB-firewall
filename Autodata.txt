@@ -1,0 +1,31 @@
+Note   The NoDriveAutoRun and NoDriveTypeAutoRun values should only be modified by system administrators to change the value for the entire system for testing or administrative purposes. Applications should not modify these values, as there is no way to reliably restore them to their original values. 
+The NoDriveAutoRun value disables AutoRun for specified drive letters. It is a REG_DWORD data value, found under the following key: 
+
+HKEY_CURRENT_USER
+Software
+Microsoft
+Windows
+CurrentVersion
+Policies
+Explorer
+The first bit of the value corresponds to drive A:, the second to B:, and so on. To disable AutoRun for one or more drive letters, set the corresponding bits. For example, to disable the A: and C: drives, set NoDriveAutoRun to 0x00000005. 
+
+The NoDriveTypeAutoRun value disables AutoRun for a class of drives. It is a REG_DWORD or 4-byte REG_BINARY data value, found under the same key.
+
+HKEY_CURRENT_USER
+Software
+Microsoft
+Windows
+CurrentVersion
+Policies
+Explorer
+By setting the bits of this value's first byte, different drives can be excluded from working with AutoRun. 
+
+The following table gives the bits and bitmask constants, that can be set in the first byte of NoDriveTypeAutoRun to disable AutoRun for a particular drive type. For Microsoft Windows NT and later systems, you must restart Windows Explorer before the changes take effect. 
+
+Bit Number  Bitmask Constant  Description  
+0x04  DRIVE_REMOVEABLE  Disk can be removed from drive (such as a floppy disk).  
+0x08  DRIVE_FIXED  Disk cannot be removed from drive (a hard disk).  
+0x10 DRIVE_REMOTE  Network drive.  
+0x20 DRIVE_CDROM  CD-ROM drive.  
+0x40 DRIVE_RAMDISK  RAM disk.  
